@@ -10,5 +10,9 @@ another add
 in 14:12
 
 git branch test
+<<<<<<< HEAD
 name: yasuo
+=======
+name: jiesi
+>>>>>>> jiesi
 in 11:37
