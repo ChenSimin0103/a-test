@@ -1,0 +1,30 @@
+/**
+   * @desc 1.根据传入的评分（thisscore，带小数点）来输出一个用1,0.5,0分别表示满星，半星，无星的数组result
+           2.有小数位时对应关系为：[0.0-0.5)无星 [0.5-1.0)半星 取1.0时满星
+			3.LENGTH 配置星的个数
+			4.可能的问题：1未做输入校验 2未做输出限制 
+   */
+var comp = function (thisscore){
+const LENGTH = 5
+let result = []
+// 相当于把评分数字的小数位向下化归到最近的0.5或0
+let score = Math.floor(thisscore * 2) / 2
+// 是否有小数位
+let hasDecimal = ( score % 1 !== 0 )
+// 取整数位
+let integer = Math.floor(score)
+// 添加整数位个 '1'
+for (let i=0;i<integer;i++) {
+	result.push('1')
+}
+// 有小数位则加一个 '0.5'
+if (hasDecimal) {
+	result.push('0.5')
+}
+// 用'0'补齐剩下的空位
+while (result.length < LENGTH)
+	result.push('0')
+return result
+}
+// 用例
+comp(0.6)
