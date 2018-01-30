@@ -1,0 +1,29 @@
+function fun(){
+	var north = "Jone Snow";
+	var west = "Trion Lanister";
+	var test = "233";
+	var showNorth = function(){
+		var another;
+		console.log("北境：" + north);
+	};
+	var showWest = function(){
+		var another;
+		console.log("西境：" + west);
+	};
+	var showTest = function(){
+		console.log(test)
+	}
+	return {
+		// 待修改
+		cold: function(){ showNorth() },
+		hot: function(){ showWest() },
+		test: function(){ showTest() }
+	}
+}
+/* 创建/初始化
+** 如果是 var fun = function(){} 这样定义的话 使用：fun().test()
+*/
+var show = fun()
+show.test()
+show.cold()
+show.hot()
