@@ -1,0 +1,20 @@
+// 写一个闭包的例子，如何正确地通过循环给一个数组写十个闭包子元素
+
+function constfunc (v) {
+    return function() {return v}
+}
+var list = [];
+for(i=0;i<10;i++) {
+    list.push(constfunc(i))
+}
+list[5]()  // 5
+
+function constfunc() {
+    var list = [];
+    for(i=0;i<10;i++) {
+        list.push(function(){return i})
+    }
+    return list;
+}
+var func = constfunc();
+func[5]()  // 10
