@@ -7,7 +7,7 @@ var list = [];
 for(i=0;i<10;i++) {
     list.push(constfunc(i))
 }
-list[5]()  // 5
+list[5]()  // 5 正常
 
 function constfunc() {
     var list = [];
@@ -17,4 +17,4 @@ function constfunc() {
     return list;
 }
 var func = constfunc();
-func[5]()  // 10
+func[5]()  // 10 不正常，每个元素都是10
