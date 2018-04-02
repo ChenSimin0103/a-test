@@ -1,0 +1,20 @@
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+ 
+ 此写法非常简单，是提交最多的答案，可能是某个比较权威的作者给出的
+ 
+var rob = function(nums) {
+    let withCur = 0;
+    let withoutCur = 0;
+   
+    for (let i = 0; i < nums.length; i++) {
+        let previousRobbedSum = withCur;
+        
+        withCur = withoutCur + nums[i];
+        withoutCur = Math.max(previousRobbedSum, withoutCur);
+    }
+    
+    return Math.max(withCur, withoutCur);
+};
