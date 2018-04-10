@@ -1,0 +1,28 @@
+/**
+ * @param {number} n
+ * @return {number[][]}
+ */
+// 问题在于：如何使得里层和外层的处理完全相同 把col++改成--col的方法
+
+
+var generateMatrix = function(n) {
+    // 初始化方阵
+    var result = new Array(n)
+    for(i=0;i<n;i++){
+        result[i] = new Array(n)
+    }
+    var i=1, row=0, col=0, index=n;
+    while(i<=n*n && index>1){
+        while(col<index && i<=n*n)
+            result[row][col++] = i++
+        col--
+        while(row<index && i<=n*n)
+            result[row++][col] = i++
+        row--
+        while(col>0 && i<=n*n)
+            result[row][--col] = i++
+        while(row>1 && i<=n*n)
+            result[--row][col] = i++
+        index--
+    }
+};
