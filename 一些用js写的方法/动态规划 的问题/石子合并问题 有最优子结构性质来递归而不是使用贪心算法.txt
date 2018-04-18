@@ -1,0 +1,49 @@
+问题：用一个有n个元素的数组代表n堆石子，先要将它们合并为一堆，要求是每次只能合并相邻的两堆，
+		且每次合并花费为两堆石子数量之和，求合并的最小/最大花费
+		
+分析问题：此题不能使用贪心算法来求解，会求出局部最优解而不是全局最优解；
+		对于[0,1...i...n]这样的数组，有最优解M(0,n)，假设从i处划分，则对于[0,...i]的最优解M(0,i),[i+1,...n]的最优解M(i+1,n)，
+		必有M(0,n)=M(0,i)+M(i+1,n)+W，W为此划分合并时的花费
+		即父结构的最优解必然是由子结构的最优解组成的
+		这样的话，思路就是由最小的子结构逐渐向上计算，在本例中（0~n）,先计算n-1个规模是2的子结构的最优解，再计算n-2个规模是3的子结构的最优解，直到2个规模是n-1的子结构的最优解，到最后1个规模是n的整体的最优解
+		通项公式为：Min(i,j)=0 (i==j); Min(i,j)=Min(Min(i,k)+Min(k+1,j))+W(i,j) (i<j) 
+		若计算最大花费：Max(i,j)=0 (i==j); Max(i,j)=Max(Max(i,k)+Max(k+1,j))+W(i,j) (i<j) 
+		
+另：若是一个圆环问题，即数组[0,...n]的头尾是相接的，该问题可转化成对于直线型问题[0,...n,0,...n-1]的规模为n的子结构的最优解，因其中已包含圆环问题的(0,...n),(1,...0)...(n,...n-1)这n个子问题
+
+/**
+ * @param {number[],number} 问题描述数组，问题规模（对于直线型问题是数组长度n,对于圆环形问题是n,但描述数组有2n-1个元素） 
+ * @return {number}
+ */
+ 
+ function minSpend(nums,n){
+	// 初始化二维数组
+	var min = new Array(n)
+	for(i=0;i<=n;i++){
+		min[i] = new Array(n)
+		for(j=0;j<=n;j++){
+			min[i][j] = 0
+		}
+	}
+	// sum存下前i项之和
+	var sum = [0]
+	for(i=1;i<=n;i++){
+		sum[i] = sum[i-1] + nums[i-1]
+	}
+console.log(sum)
+	for(v=2;v<=n;v++){
+		for(i=1;i<=n-v+1;i++){
+			var j = i + v-1
+			min[i][j] = Infinity
+			var tmp = sum[j]-sum[i-1]
+			for(k=i;k<j;k++){
+				min[i][j] = Math.min(min[i][j],min[i][k]+min[k+1][j]+tmp)
+			}
+		}
+	}
+console.log(min)
+	return min[1][n]
+ }
+var arr = [5,8,6,9,2,3]
+var n = 6
+minSpend(arr,n) 
