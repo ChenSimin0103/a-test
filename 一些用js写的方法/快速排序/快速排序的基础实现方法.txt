@@ -3,7 +3,11 @@
 优化：
 	返回基准元素位置部分可以i和j不断比较，一次赋值
 
-
+/**
+ * @param {array,number,number} 原数组，第一位的index，最后一位的index
+ * @return {array}              排序后的数组
+ */
+ 
 // 快排函数，采取分治法分解子问题，然后递归调用
 function quickSort(arr, low, high) {
 	var mid;
@@ -15,7 +19,7 @@ function quickSort(arr, low, high) {
 	}
 	return arr
 }
-// 划分函数返回基准元素所在的下标，这里使用数组第一位做基准元素起始位
+// 划分函数，返回基准元素所在的下标，这里使用数组第一位做基准元素起始位
 function part(arr, low, high) {
 	var i=low, j=high, pivot=arr[low], temp;
 	while(i<j){
