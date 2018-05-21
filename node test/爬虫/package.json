@@ -1,0 +1,13 @@
+{
+  "name": "name",
+  "description": "description",
+  "authors": "author",
+  "version": "0.0.1",
+  "main": "pathToMain",
+  "dependencies": {
+    "express": "",
+    "superagent": "",
+    "cheerio": "",
+    "async": ""
+  }
+}
