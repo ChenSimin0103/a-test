@@ -27,8 +27,8 @@ function breadthFirstSearch(node) {
     while(temp.length > 0) {
         let out = temp.shift()
         result.push(out.val)
-        out.left?temp.push(out.left):void 0
-        out.right?temp.push(out.right):void 0
+        if(out.left) temp.push(out.left)
+        if(out.right) temp.push(out.right)
     }
     console.log(result);
     return result
