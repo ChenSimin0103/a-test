@@ -182,7 +182,7 @@ function resolvePromise(promise2, x, resolve, reject) {
 
 
 
-// 验证效果：使用 Promise-aplus-tests
+// 验证效果：使用 Promise-aplus-tests 插件
 // Promise.defer = Promise.deferred = function () {
 //   let dfd = {}
 //   dfd.promise = new MyPromise((resolve,reject)=>{
@@ -193,6 +193,7 @@ function resolvePromise(promise2, x, resolve, reject) {
 // }
 // module.exports = Promise;
 
+// 使用一下
 function getVal() {
   return new MyPromise((resolve, reject) => {
     setTimeout(() => {
