@@ -29,26 +29,25 @@ inputb.addEventListener('keyup', function(e) {
 });
 
 // 节流 没看太懂
-function throttle(fun, delay) {
-  let last, deferTimer;
-  return function(args) {
-    let self = this;
-    // 这个 arguments 从哪来？
-    let _args = arguments;
-    // +new Date() 相当于 ( new Date() ).valueOf()
-    let now = +new Date();
-    if (last && (now < last + delay)) {
-      clearTimeout(deferTimer);
-      deferTimer = setTimeout(function() {
-        last = now;
-        fun.apply(self, _args);
-      }, delay);
+function throttle(fn, cycle) {
+  let start = +Date.now()
+  let now
+  let timer
+  return function () {
+    now = +Date.now()
+    clearTimeout(timer)
+    // 注意 Date 拿到的是毫秒
+    if(now - start >= cycle) {
+      fn.apply(this, arguments)
+      start = now
     } else {
-      last = now;
-      fun.apply(self, _args);
+      timer = setTimeout(() => {
+        fn.apply(this, arguments)
+      }, cycle)
     }
-  };
+  }
 }
+
 
 let throttleAjax = throttle(ajax, 1000);
 let inputc = document.getElementById('throttle');
